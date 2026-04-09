@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You 💌</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+}
+
+.card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    width: 300px;
+}
+
+h1 {
+    color: #ff4d6d;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+#startBtn {
+    background: #ff4d6d;
+    color: white;
+    animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+    from { box-shadow: 0 0 5px #ff4d6d; }
+    to { box-shadow: 0 0 20px #ff4d6d; }
+}
+
+#yesBtn {
+    background: #28a745;
+    color: white;
+}
+
+#noBtn {
+    background: #dc3545;
+    color: white;
+    position: absolute;
+}
+
+#message {
+    margin-top: 20px;
+    font-size: 18px;
+    min-height: 60px;
+}
+
+#final {
+    display: none;
+    font-size: 20px;
+    color: #ff4d6d;
+    margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Para sayo to</h1>
+    <p>Click this, please</p>
+    <button id="startBtn" onclick="start()">Start 💌</button>
+
+    <div id="message"></div>
+
+    <div id="choices" style="display:none;">
+        <button id="yesBtn" onclick="yes()">Yes </button>
+        <button id="noBtn" onmouseover="moveNo()">No </button>
+    </div>
+
+    <div id="final"></div>
+</div>
+
+<script>
+const text = [
+    "Hi... ",
+    "Sorry kung dito ko pa sinabi...",
+    "Nahihiya kasi talaga ako...",
+    "Hindi ko alam paano sabihin sayo...",
+    "Pero gusto ko maging honest...",
+    "May gusto ako sayo",
+    "Okay lang kahit anong sagot mo okay ikaw na yan e"
+];
+
+let i = 0;
+
+function typeWriter() {
+    if (i < text.length) {
+        document.getElementById("message").innerHTML = text[i];
+        i++;
+        setTimeout(typeWriter, 1500);
+    } else {
+        document.getElementById("choices").style.display = "block";
+    }
+}
+
+function start() {
+    document.getElementById("startBtn").style.display = "none";
+    typeWriter();
+}
+
+function moveNo() {
+    const btn = document.getElementById("noBtn");
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    btn.style.left = x + "px";
+    btn.style.top = y + "px";
+}
+
+function yes() {
+    document.getElementById("choices").style.display = "none";
+    document.getElementById("message").style.display = "none";
+    document.getElementById("final").style.display = "block";
+    document.getElementById("final").innerHTML = "chat me if maganda ba ang website HAHAHAHAHAHA";
+}
+</script>
+
+</body>
+</html>
